@@ -296,6 +296,16 @@ header {
     letter-spacing: 0.5px;
 }
 
+.student-kelompok {
+    background-color: var(--secondary);
+    color: white;
+    font-size: 0.70rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
 .student-risk {
     font-size: 0.9rem;
     color: var(--danger);
