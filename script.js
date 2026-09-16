@@ -82,34 +82,34 @@ const procedures = {
 };
 
 const students = [
-    { cls: "1A", kel: "Kelompok 6", name: "Adnaan Daneer Faeyza", risk: "Kebanyakan makan coklat jadi muntah, Dermatitis atopik", meds: "", category: ["makanan", "fisik"], proc: "alergi_makanan" },
-    { cls: "1A", kel: "Kelompok 6", name: "Hizan Abdi Gusti", risk: "Radang saluran empedu saat masih bayi", meds: "", category: ["fisik"], proc: null },
-    { cls: "1A", kel: "Kelompok 3", name: "Jahida Walagri Arkana", risk: "Sedang suka mimisan, terutama di pagi hari", meds: "", category: ["fisik"], proc: "mimisan" },
-    { cls: "1A", kel: "Kelompok 4", name: "Kiarana Alhaza Tsabita", risk: "Asma jadi gampang batuk kalo terlalu dingin", meds: "Sesekali nebu jika batuk asmanya intens kambuh", category: ["suhu"], proc: "asma" },
-    { cls: "1A", kel: "Kelompok 4", name: "Maezurra Karima Shabira", risk: "flu, batuk, masuk angin, kembung, demam.", meds: "imboost vitamin, tolak angin, Proris ibuprofen, actived, polysilane Jr", category: ["fisik"], proc: "alergi_makanan" },
-    { cls: "1A", kel: "Kelompok 6", name: "Muhammad Juna Ahnaf", risk: "Suhu", meds: "", category: ["suhu"], proc: "alergi_suhu" },
-    { cls: "1A", kel: "Kelompok 7", name: "Muhammad Xherdan Putra", risk: "Alergi dingin, batuk2, flu, dan mimisan, penanganannya di berikan kehangatan (minyak telon)", meds: "", category: ["suhu"], proc: "mimisan" },
-    { cls: "1A", kel: "Kelompok 6", name: "Rasya Rafif Arrasyid", risk: "Suhu", meds: "", category: ["suhu"], proc: "alergi_suhu" },
+    { cls: "1A", kel: "Kelompok 6 (Api)", name: "Adnaan Daneer Faeyza", risk: "Kebanyakan makan coklat jadi muntah, Dermatitis atopik", meds: "", category: ["makanan", "fisik"], proc: "alergi_makanan" },
+    { cls: "1A", kel: "Kelompok 6 (Api)", name: "Hizan Abdi Gusti", risk: "Radang saluran empedu saat masih bayi", meds: "", category: ["fisik"], proc: null },
+    { cls: "1A", kel: "Kelompok 3 (Air)", name: "Jahida Walagri Arkana", risk: "Sedang suka mimisan, terutama di pagi hari", meds: "", category: ["fisik"], proc: "mimisan" },
+    { cls: "1A", kel: "Kelompok 4 (Udara)", name: "Kiarana Alhaza Tsabita", risk: "Asma jadi gampang batuk kalo terlalu dingin", meds: "Sesekali nebu jika batuk asmanya intens kambuh", category: ["suhu"], proc: "asma" },
+    { cls: "1A", kel: "Kelompok 4 (Udara)", name: "Maezurra Karima Shabira", risk: "flu, batuk, masuk angin, kembung, demam.", meds: "imboost vitamin, tolak angin, Proris ibuprofen, actived, polysilane Jr", category: ["fisik"], proc: "alergi_makanan" },
+    { cls: "1A", kel: "Kelompok 6 (Api)", name: "Muhammad Juna Ahnaf", risk: "Suhu", meds: "", category: ["suhu"], proc: "alergi_suhu" },
+    { cls: "1A", kel: "Kelompok 7 (Pohon)", name: "Muhammad Xherdan Putra", risk: "Alergi dingin, batuk2, flu, dan mimisan, penanganannya di berikan kehangatan (minyak telon)", meds: "", category: ["suhu"], proc: "mimisan" },
+    { cls: "1A", kel: "Kelompok 6 (Api)", name: "Rasya Rafif Arrasyid", risk: "Suhu", meds: "", category: ["suhu"], proc: "alergi_suhu" },
     
-    { cls: "1B", kel: "Kelompok 3", name: "Medina Humaira Putri", risk: "alergi dingin yg berlebih", meds: "", category: ["suhu"], proc: "alergi_suhu" },
-    { cls: "1B", kel: "Kelompok 7", name: "Muhammad Ghaisan", risk: "Dingin", meds: "", category: ["suhu"], proc: "alergi_suhu" },
-    { cls: "1B", kel: "Kelompok 6", name: "Rafasya Aksa Parvez", risk: "Klo cuaca terlalu panas keringat berlebih", meds: "", category: ["suhu", "fisik"], proc: null },
-    { cls: "1B", kel: "Kelompok 5", name: "Syedtimur Syarief", risk: "Dingin, batuk pilek, Kalo batuk ada sesek", meds: "Kalo sesek (nebu), batuk pilek (lapifed), demam (sanmol/tempra forte)", category: ["suhu"], proc: "asma" },
+    { cls: "1B", kel: "Kelompok 3 (Air)", name: "Medina Humaira Putri", risk: "alergi dingin yg berlebih", meds: "", category: ["suhu"], proc: "alergi_suhu" },
+    { cls: "1B", kel: "Kelompok 7 (Pohon)", name: "Muhammad Ghaisan", risk: "Dingin", meds: "", category: ["suhu"], proc: "alergi_suhu" },
+    { cls: "1B", kel: "Kelompok 6 (Api)", name: "Rafasya Aksa Parvez", risk: "Klo cuaca terlalu panas keringat berlebih", meds: "", category: ["suhu", "fisik"], proc: null },
+    { cls: "1B", kel: "Kelompok 5 (Matahari)", name: "Syedtimur Syarief", risk: "Dingin, batuk pilek, Kalo batuk ada sesek", meds: "Kalo sesek (nebu), batuk pilek (lapifed), demam (sanmol/tempra forte)", category: ["suhu"], proc: "asma" },
     
-    { cls: "2A", kel: "Kelompok 2", name: "Eshal Mariam", risk: "Pernah TB Kelenjar saat usia 3 tahun", meds: "", category: ["fisik"], proc: null },
-    { cls: "2A", kel: "Kelompok 3", name: "Fayza Rahmi Meinanda", risk: "Alergi suhu dingin, Asma", meds: "Rymont", category: ["suhu"], proc: "asma" },
-    { cls: "2A", kel: "Kelompok 3", name: "Ghaida Aljazira Mecca", risk: "Bila terlalu panas/kedinginan gatal, Terapi tangan kiri kaku", meds: "", category: ["suhu", "fisik"], proc: "alergi_suhu" },
-    { cls: "2A", kel: "Kelompok 2", name: "Jennaira Mahathira", risk: "Alergi susu sapi/intoleransi laktosa, sensitif dingin, Rhinitis, tonsilitis", meds: "cetirizine, semprot hidung modexa", category: ["makanan", "suhu"], proc: "alergi_makanan" },
-    { cls: "2A", kel: "Kelompok 8", name: "Muhammad Attarkun", risk: "Alergi dingin, Rhinitis allergy", meds: "Cetirizine", category: ["suhu"], proc: "alergi_suhu" },
-    { cls: "2A", kel: "Kelompok 1", name: "Raira Qaireen Azzahra", risk: "Jika udara dingin , biasanya bersin-bersin", meds: "", category: ["suhu"], proc: "alergi_suhu" },
-    { cls: "2A", kel: "Kelompok 7", name: "Ryuji Arga", risk: "Alergi dingin", meds: "", category: ["suhu"], proc: "alergi_suhu" },
+    { cls: "2A", kel: "Kelompok 2 (Daun)", name: "Eshal Mariam", risk: "Pernah TB Kelenjar saat usia 3 tahun", meds: "", category: ["fisik"], proc: null },
+    { cls: "2A", kel: "Kelompok 3 (Air)", name: "Fayza Rahmi Meinanda", risk: "Alergi suhu dingin, Asma", meds: "Rymont", category: ["suhu"], proc: "asma" },
+    { cls: "2A", kel: "Kelompok 3 (Air)", name: "Ghaida Aljazira Mecca", risk: "Bila terlalu panas/kedinginan gatal, Terapi tangan kiri kaku", meds: "", category: ["suhu", "fisik"], proc: "alergi_suhu" },
+    { cls: "2A", kel: "Kelompok 2 (Daun)", name: "Jennaira Mahathira", risk: "Alergi susu sapi/intoleransi laktosa, sensitif dingin, Rhinitis, tonsilitis", meds: "cetirizine, semprot hidung modexa", category: ["makanan", "suhu"], proc: "alergi_makanan" },
+    { cls: "2A", kel: "Kelompok 8 (Rumput)", name: "Muhammad Attarkun", risk: "Alergi dingin, Rhinitis allergy", meds: "Cetirizine", category: ["suhu"], proc: "alergi_suhu" },
+    { cls: "2A", kel: "Kelompok 1 (Bunga)", name: "Raira Qaireen Azzahra", risk: "Jika udara dingin , biasanya bersin-bersin", meds: "", category: ["suhu"], proc: "alergi_suhu" },
+    { cls: "2A", kel: "Kelompok 7 (Pohon)", name: "Ryuji Arga", risk: "Alergi dingin", meds: "", category: ["suhu"], proc: "alergi_suhu" },
     
-    { cls: "2B", kel: "Kelompok 5", name: "Arjuna Ramadhan", risk: "alergi dingin (rhinitis alergi)", meds: "", category: ["suhu"], proc: "alergi_suhu" },
-    { cls: "2B", kel: "Kelompok 2", name: "Kayla Inayah Naiful", risk: "suhu dingin & makan manis berlebihan", meds: "vit dari dokter", category: ["suhu", "makanan"], proc: "alergi_makanan" },
-    { cls: "2B", kel: "Kelompok 3", name: "Maiza Numa Malika", risk: "Asma", meds: "", category: ["suhu"], proc: "asma" },
-    { cls: "2B", kel: "Kelompok 8", name: "Muhammad Umarain", risk: "dingin - langsung bentol", meds: "", category: ["suhu"], proc: "alergi_suhu" },
-    { cls: "2B", kel: "Kelompok 1", name: "Syarafana Delisha", risk: "Alergi dingin, coklat meises, sabun, Sinusitis dan eksim", meds: "Cetinal, semprot hidung modexa, pelembab", category: ["suhu", "makanan", "fisik"], proc: "alergi_makanan" },
-    { cls: "2B", kel: "Kelompok 4", name: "Nabila Azkiya Marwa", risk: "Alergi dingin & debu, Asma", meds: "", category: ["suhu", "fisik"], proc: "asma" }
+    { cls: "2B", kel: "Kelompok 5 (Matahari)", name: "Arjuna Ramadhan", risk: "alergi dingin (rhinitis alergi)", meds: "", category: ["suhu"], proc: "alergi_suhu" },
+    { cls: "2B", kel: "Kelompok 2 (Daun)", name: "Kayla Inayah Naiful", risk: "suhu dingin & makan manis berlebihan", meds: "vit dari dokter", category: ["suhu", "makanan"], proc: "alergi_makanan" },
+    { cls: "2B", kel: "Kelompok 3 (Air)", name: "Maiza Numa Malika", risk: "Asma", meds: "", category: ["suhu"], proc: "asma" },
+    { cls: "2B", kel: "Kelompok 8 (Rumput)", name: "Muhammad Umarain", risk: "dingin - langsung bentol", meds: "", category: ["suhu"], proc: "alergi_suhu" },
+    { cls: "2B", kel: "Kelompok 1 (Bunga)", name: "Syarafana Delisha", risk: "Alergi dingin, coklat meises, sabun, Sinusitis dan eksim", meds: "Cetinal, semprot hidung modexa, pelembab", category: ["suhu", "makanan", "fisik"], proc: "alergi_makanan" },
+    { cls: "2B", kel: "Kelompok 4 (Udara)", name: "Nabila Azkiya Marwa", risk: "Alergi dingin & debu, Asma", meds: "", category: ["suhu", "fisik"], proc: "asma" }
 ];
 
 const schedule = [
