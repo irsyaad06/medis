@@ -186,10 +186,10 @@ function renderStudents() {
         return;
     }
 
-    list.innerHTML = filtered.map(student => `
+    list.innerHTML = filtered.map((student, index) => `
         <div class="card student-card">
             <div class="student-header">
-                <div class="student-name">${student.name}</div>
+                <div class="student-name">${index + 1}. ${student.name}</div>
                 <div class="student-class">${student.cls}</div>
             </div>
             <div class="student-risk">
