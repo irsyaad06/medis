@@ -1,0 +1,591 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Color Palette */
+    --primary: #107c41; /* Premium Medical Green */
+    --primary-hover: #0e6c38;
+    --primary-light: #e8f5e9;
+    --secondary: #2b579a; /* Deep Blue for contrast */
+    --background: #f8fafc; /* Tailwind Slate 50 */
+    --surface: #ffffff;
+    --text-main: #1e293b; /* Slate 800 */
+    --text-muted: #64748b; /* Slate 500 */
+    --border: #e2e8f0; /* Slate 200 */
+    --danger: #ef4444; /* Red 500 */
+    --danger-light: #fef2f2;
+    --warning: #f59e0b;
+    
+    /* Layout */
+    --nav-height: 70px;
+    --border-radius-lg: 16px;
+    --border-radius-md: 12px;
+    --border-radius-sm: 8px;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-glass: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding-bottom: calc(var(--nav-height) + 20px);
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4 {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.025em;
+}
+
+/* --- Header --- */
+header {
+    background-color: var(--surface);
+    color: var(--text-main);
+    padding: 1.25rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title h1 {
+    font-size: 1.25rem;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header-title p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* --- Layout Container --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+/* --- Tabs --- */
+.tab-content {
+    display: none;
+    animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Bottom Nav --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+    z-index: 100;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.nav-item {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-md);
+    transition: all 0.3s ease;
+    min-width: 70px;
+}
+
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    transition: transform 0.3s ease;
+}
+
+.nav-item:hover {
+    background-color: var(--primary-light);
+    color: var(--primary);
+}
+
+.nav-item.active {
+    color: var(--primary);
+    background-color: var(--primary-light);
+}
+
+.nav-item.active svg {
+    transform: translateY(-2px);
+}
+
+/* --- Grid Systems --- */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+}
+
+/* List Layout (for Inventory/Schedule) */
+.list-container {
+    background-color: var(--surface);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+/* --- Filters --- */
+.filters-wrapper {
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+}
+
+.filters-wrapper::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+
+.filters {
+    display: flex;
+    gap: 0.75rem;
+    padding: 4px;
+}
+
+.filter-btn {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.6rem 1.25rem;
+    border-radius: 99px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: var(--shadow-sm);
+}
+
+.filter-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.filter-btn.active {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(16, 124, 65, 0.25);
+}
+
+/* --- Cards --- */
+.card {
+    background-color: var(--surface);
+    border-radius: var(--border-radius-lg);
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.student-card {
+    border-top: 4px solid var(--warning);
+}
+
+.student-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.student-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-main);
+    line-height: 1.2;
+}
+
+.student-class {
+    background-color: var(--text-main);
+    color: white;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.student-risk {
+    font-size: 0.9rem;
+    color: var(--danger);
+    background-color: var(--danger-light);
+    padding: 10px 12px;
+    border-radius: var(--border-radius-md);
+    margin-bottom: 1rem;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.student-risk-title {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.student-risk-title svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+.student-meds {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background-color: var(--background);
+    padding: 10px 12px;
+    border-radius: var(--border-radius-md);
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+/* Action Button */
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary-light);
+    color: var(--primary);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-action:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-action svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+/* --- Inventory & Book Lists --- */
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.2s;
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.list-item:hover {
+    background-color: var(--background);
+}
+
+.list-item-content h3 {
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.list-item-content p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.badge {
+    background-color: var(--primary-light);
+    color: var(--primary-hover);
+    padding: 4px 10px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* --- Schedule Timeline --- */
+.timeline {
+    padding: 1.5rem;
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 2rem;
+    top: 1.5rem;
+    bottom: 1.5rem;
+    width: 2px;
+    background-color: var(--border);
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 2.5rem;
+    margin-bottom: 1.75rem;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 0.25rem;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    border: 3px solid var(--surface);
+    box-shadow: 0 0 0 1px var(--primary);
+    z-index: 1;
+}
+
+.timeline-time {
+    font-weight: 700;
+    color: var(--secondary);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.timeline-desc {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    background-color: var(--background);
+    padding: 10px 12px;
+    border-radius: var(--border-radius-md);
+    display: inline-block;
+    width: 100%;
+}
+
+/* --- Glassmorphism Modal --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Mobile bottom sheet style by default */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: var(--surface);
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh;
+    border-radius: 24px 24px 0 0;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-glass);
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 2;
+}
+
+.modal-header h3 {
+    font-size: 1.1rem;
+    color: var(--primary-hover);
+    padding-right: 1rem;
+}
+
+.btn-close {
+    background: var(--background);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.btn-close:hover {
+    background: var(--border);
+    color: var(--text-main);
+}
+
+.modal-body {
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.modal-body ul, .modal-body ol {
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.modal-body li {
+    margin-bottom: 0.5rem;
+}
+
+.modal-body strong {
+    color: var(--text-main);
+}
+
+.modal-body .step-title {
+    color: var(--secondary);
+    font-weight: 600;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.modal-body .danger-note {
+    background-color: var(--danger-light);
+    color: var(--danger);
+    padding: 0.75rem;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    border-left: 4px solid var(--danger);
+    margin-top: 1rem;
+}
+
+/* Drag Handle for Mobile Modal */
+.modal-handle {
+    width: 40px;
+    height: 4px;
+    background-color: var(--border);
+    border-radius: 2px;
+    margin: -0.5rem auto 1rem auto;
+    display: block;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-muted);
+}
+
+.empty-state svg {
+    width: 48px;
+    height: 48px;
+    fill: var(--border);
+    margin-bottom: 1rem;
+}
+
+/* --- Responsive Desktop / iPad adjustments --- */
+@media (min-width: 768px) {
+    .modal-overlay {
+        align-items: center; /* Center modal on large screens */
+        padding: 2rem;
+    }
+    
+    .modal-content {
+        border-radius: var(--border-radius-lg);
+        height: auto;
+    }
+    
+    .modal-handle {
+        display: none;
+    }
+    
+    .bottom-nav {
+        justify-content: center;
+        gap: 2rem;
+    }
+    
+    .nav-item {
+        min-width: 90px;
+    }
+}
