@@ -176,7 +176,38 @@ header {
     overflow: hidden;
 }
 
-/* --- Filters --- */
+/* --- Filters & Search --- */
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius-md);
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.search-container svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--text-muted);
+    margin-right: 0.75rem;
+}
+
+.search-container input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    background: transparent;
+}
+
+.search-container input::placeholder {
+    color: var(--text-muted);
+}
+
 .filters-wrapper {
     margin-bottom: 1.5rem;
     overflow-x: auto;

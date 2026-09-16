@@ -164,9 +164,18 @@ function renderPocketBook() {
     `).join('');
 }
 
-function renderStudents(filter = 'all') {
+let currentFilter = 'all';
+let currentSearch = '';
+
+function renderStudents() {
     const list = document.getElementById('students-list');
-    const filtered = students.filter(s => filter === 'all' || s.category.includes(filter));
+    
+    // Filter by Category & Search
+    const filtered = students.filter(s => {
+        const matchCategory = currentFilter === 'all' || s.category.includes(currentFilter);
+        const matchSearch = s.name.toLowerCase().includes(currentSearch) || s.cls.toLowerCase().includes(currentSearch);
+        return matchCategory && matchSearch;
+    });
 
     if (filtered.length === 0) {
         list.innerHTML = `
@@ -238,9 +247,17 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         e.target.classList.add('active');
-        renderStudents(e.target.dataset.filter);
+        currentFilter = e.target.dataset.filter;
+        renderStudents();
     });
 });
+
+// Search Logic
+function handleSearch() {
+    const input = document.getElementById('search-student');
+    currentSearch = input.value.toLowerCase();
+    renderStudents();
+}
 
 // Modal Logic
 function openModal(procKey) {
