@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Medis SD</title>
+    <style>
+        :root {
+            --primary: #2e7d32; /* Green Medical */
+            --primary-light: #60ad5e;
+            --primary-dark: #005005;
+            --bg-color: #f4f6f8;
+            --surface: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-color: #e0e0e0;
+            --danger: #d32f2f;
+            --warning: #f57c00;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 70px; /* Space for bottom nav */
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        header p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        .container {
+            padding: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Tabs */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--surface);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+
+        .nav-item {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            flex: 1;
+            transition: all 0.2s;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+            background-color: rgba(46, 125, 50, 0.1);
+            font-weight: 600;
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--surface);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+        }
+
+        /* Inventory List */
+        .inv-list {
+            list-style: none;
+        }
+        
+        .inv-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .inv-item:last-child {
+            border-bottom: none;
+        }
+
+        .inv-name {
+            font-weight: 500;
+        }
+
+        .inv-qty {
+            background-color: var(--primary-light);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .filters::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-btn {
+            background-color: var(--surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Student Card */
+        .student-card {
+            border-left-color: var(--warning);
+        }
+
+        .student-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .student-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .student-class {
+            background-color: #e0e0e0;
+            color: var(--text-main);
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .student-risk {
+            font-size: 0.9rem;
+            color: var(--danger);
+            margin-bottom: 0.5rem;
+            background-color: rgba(211, 47, 47, 0.05);
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .student-meds {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 4px;
+            align-items: flex-start;
+        }
+
+        .student-meds svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--primary);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Schedule Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--primary-light);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .timeline-time {
+            font-weight: bold;
+            color: var(--primary-dark);
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .timeline-desc {
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Tim Medis Kemping</h1>
+        <p>Dashboard Pemantauan & Logistik</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- INVENTORY TAB -->
+        <div id="tab-inventory" class="tab-content active">
+            <h2 style="margin-bottom: 1rem; font-size: 1.2rem;">Inventaris Alat & Obat</h2>
+            <div class="card">
+                <ul class="inv-list" id="inventory-list">
+                    <!-- Injected by JS -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- STUDENTS TAB -->
+        <div id="tab-students" class="tab-content">
+            <h2 style="margin-bottom: 1rem; font-size: 1.2rem;">Risiko Medis Siswa</h2>
+            
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="suhu">Suhu Dingin/Asma</button>
+                <button class="filter-btn" data-filter="makanan">Alergi Makanan</button>
+                <button class="filter-btn" data-filter="fisik">Fisik/Lainnya</button>
+            </div>
+
+            <div id="students-list">
+                <!-- Injected by JS -->
+            </div>
+        </div>
+
+        <!-- SCHEDULE TAB -->
+        <div id="tab-schedule" class="tab-content">
+            <h2 style="margin-bottom: 1rem; font-size: 1.2rem;">Jadwal & Rundown</h2>
+            <div class="card">
+                <div class="timeline" id="schedule-list">
+                    <!-- Injected by JS -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchTab('inventory', this)">
+            <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
+            Inventaris
+        </button>
+        <button class="nav-item" onclick="switchTab('students', this)">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            Risiko Medis
+        </button>
+        <button class="nav-item" onclick="switchTab('schedule', this)">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+            Jadwal
+        </button>
+    </nav>
+
+    <script>
+        // --- DATA MASTER ---
+        const inventory = [
+            { name: 'Caladinplast', qty: '1' },
+            { name: 'Betadin + kasa + gunting', qty: '1 set' },
+            { name: 'Kayu putih', qty: '3' },
+            { name: 'Butbut (minyak herbal)', qty: '1' },
+            { name: 'Termometer', qty: '1' },
+            { name: 'Alkohol', qty: '1' },
+            { name: 'Promag', qty: '1' },
+            { name: 'Parasetamol', qty: '2' },
+            { name: 'Tolak angin anak dan dewasa', qty: '1' },
+            { name: 'Obat diare', qty: '1' },
+            { name: 'Lotion nyamuk (Sofel dsb)', qty: '2' },
+            { name: 'Kasa steril', qty: '2 box' },
+            { name: 'Emergency blanket', qty: '2' },
+            { name: 'Cottonbud', qty: '1' },
+            { name: 'Betadin cair', qty: '1' },
+            { name: 'Trombopop', qty: '1' },
+            { name: 'Rohto', qty: '1' },
+            { name: 'Ibu profen', qty: '1' },
+            { name: 'Hansaplast', qty: '1' },
+            { name: 'Kasa rol', qty: '1 pack' },
+            { name: 'Caladin cair', qty: '1' }
+        ];
+
+        const students = [
+            { cls: "1A", name: "Adnaan Daneer Faeyza Rahardi", risk: "Kebanyakan makan coklat jadi muntah, Dermatitis atopik", meds: "", category: ["makanan", "fisik"] },
+            { cls: "1A", name: "Hizan Abdi Gusti", risk: "Radang saluran empedu saat masih bayi", meds: "", category: ["fisik"] },
+            { cls: "1A", name: "Jahida Walagri Arkana", risk: "Sedang suka mimisan, terutama di pagi hari", meds: "", category: ["fisik"] },
+            { cls: "1A", name: "Kiarana Alhaza Tsabita", risk: "Asma jadi gampang batuk kalo terlalu dingin", meds: "Sesekali nebu jika batuk asmanya intens kambuh", category: ["suhu"] },
+            { cls: "1A", name: "Maezurra Karima Shabira", risk: "flu, batuk, masuk angin, kembung, demam.", meds: "imboost vitamin, tolak angin, Proris ibuprofen, actived, polysilane Jr", category: ["fisik"] },
+            { cls: "1A", name: "Muhammad Juna Ahnaf", risk: "Suhu", meds: "", category: ["suhu"] },
+            { cls: "1A", name: "Muhammad Xherdan Putra", risk: "Alergi dingin bila terlalu dingin kadang suka batuk2, flu, dan mimisan, penanganannya di berikan kehangatan seperti minyak telon didada", meds: "", category: ["suhu"] },
+            { cls: "1A", name: "Rasya Rafif Arrasyid", risk: "Suhu", meds: "", category: ["suhu"] },
+            { cls: "1B", name: "Medina Humaira Putri Cahyadi", risk: "alergi dingin yg berlebih", meds: "", category: ["suhu"] },
+            { cls: "1B", name: "Muhammad Ghaisan Al Ghifari", risk: "Dingin", meds: "", category: ["suhu"] },
+            { cls: "1B", name: "Rafasya Aksa Parvez", risk: "Klo cuaca terlalu panas keringat berlebih", meds: "", category: ["suhu", "fisik"] },
+            { cls: "1B", name: "Syedtimur Syarief", risk: "Dingin, tiap pagi bangun tidur batuk pilek, Kalo batuk ada sesek", meds: "Kalo sesek (nebu), batuk pilek (lapifed), demam (sanmol/tempra forte)", category: ["suhu"] },
+            { cls: "2A", name: "Eshal Mariam Kartawinata", risk: "Pernah TB Kelenjar saat usia 3 tahun", meds: "", category: ["fisik"] },
+            { cls: "2A", name: "Fayza Rahmi Meinanda", risk: "Alergi suhu dingin, Asma", meds: "Rymont", category: ["suhu"] },
+            { cls: "2A", name: "Ghaida Aljazira Mecca", risk: "Bila terlalu panas/kedinginan gatal, Terapi tangan kiri kaku", meds: "", category: ["suhu", "fisik"] },
+            { cls: "2A", name: "Jennaira Mahathira Kemal", risk: "Alergi susu sapi/intoleransi laktosa, sensitif dingin, Rhinitis alergi, tonsilitis", meds: "cetirizine, semprot hidung modexa", category: ["makanan", "suhu"] },
+            { cls: "2A", name: "Muhammad Attarkun Kareem", risk: "Alergi dingin, Rhinitis allergy", meds: "Cetirizine", category: ["suhu"] },
+            { cls: "2A", name: "Raira Qaireen Azzahra", risk: "Jika udara dingin , biasanya bersin-bersin", meds: "", category: ["suhu"] },
+            { cls: "2A", name: "Ryuji Arga", risk: "Alergi dingin", meds: "", category: ["suhu"] },
+            { cls: "2B", name: "Arjuna Ramadhan Putra", risk: "alergi dingin (rhinitis alergi)", meds: "", category: ["suhu"] },
+            { cls: "2B", name: "Kayla Inayah Naiful", risk: "suhu dingin & makan manis berlebihan", meds: "vit dari dokter", category: ["suhu", "makanan"] },
+            { cls: "2B", name: "Maiza Numa Malika", risk: "Asma", meds: "", category: ["suhu"] },
+            { cls: "2B", name: "Muhammad Umarain Algozali", risk: "dingin - langsung bentol", meds: "", category: ["suhu"] },
+            { cls: "2B", name: "Syarafana Delisha Sabhira", risk: "Alergi dingin dan coklat meises, alergi sabun, Sinusitis dan eksim", meds: "Cetinal, obat semprot hidung modexa, pelembab", category: ["suhu", "makanan", "fisik"] },
+            { cls: "2B", name: "Nabila Azkiya Marwa", risk: "Alergi dingin & debu, Asma", meds: "", category: ["suhu", "fisik"] }
+        ];
+
+        const schedule = [
+            { time: "13.00 - 14.30", activity: "Registrasi & Penyerahan Bahan BBQ" },
+            { time: "14.00 - 14.30", activity: "Pengondisian Barang di tenda" },
+            { time: "14.30 - 15.00", activity: "Pembukaan" },
+            { time: "15.00 - 15.30", activity: "Shalat Ashar Berjamaah" },
+            { time: "15.30 - 17.00", activity: "Games" },
+            { time: "17.00 - 19.00", activity: "Istirahat, ISHOMA" },
+            { time: "19.00 - 20.00", activity: "BBQ" },
+            { time: "20.00 - 21.00", activity: "Resik diri" },
+            { time: "21.00 - 04.00", activity: "Tidur" },
+            { time: "04.00 - 05.00", activity: "Shalat Shubuh dan Olahraga" },
+            { time: "05.00 - 06.00", activity: "Resik diri & Packing" },
+            { time: "06.00 - 06.30", activity: "Sarapan" },
+            { time: "06.30 - 08.00", activity: "Panahan, Playground, Mini Zoo" },
+            { time: "08.00 - 08.30", activity: "Refleksi Kegiatan" },
+            { time: "08.30 - 09.00", activity: "Penutupan, Reward, Foto Kelompok" },
+            { time: "09.00", activity: "Kepulangan" }
+        ];
+
+        // --- RENDER FUNCTIONS ---
+
+        function renderInventory() {
+            const list = document.getElementById('inventory-list');
+            list.innerHTML = inventory.map(item => `
+                <li class="inv-item">
+                    <span class="inv-name">${item.name}</span>
+                    <span class="inv-qty">${item.qty}</span>
+                </li>
+            `).join('');
+        }
+
+        function renderStudents(filter = 'all') {
+            const list = document.getElementById('students-list');
+            
+            const filtered = students.filter(s => filter === 'all' || s.category.includes(filter));
+
+            if (filtered.length === 0) {
+                list.innerHTML = `<div class="empty-state">Tidak ada data untuk filter ini.</div>`;
+                return;
+            }
+
+            list.innerHTML = filtered.map(student => `
+                <div class="card student-card">
+                    <div class="student-header">
+                        <div class="student-name">${student.name}</div>
+                        <div class="student-class">${student.cls}</div>
+                    </div>
+                    <div class="student-risk">
+                        <strong>Kondisi:</strong> ${student.risk}
+                    </div>
+                    ${student.meds ? `
+                    <div class="student-meds">
+                        <svg viewBox="0 0 24 24"><path d="M17 6h-2.5V3.5c0-1.1-.9-2-2-2h-1c-1.1 0-2 .9-2 2V6H7c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h2v4c0 1.1.9 2 2 2h2c1.1 0 2-.9 2-2v-4h2c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM9 14H7v-4h2v4zm6 0h-2v-4h2v4z"/></svg>
+                        <span><strong>Obat/Penanganan:</strong> ${student.meds}</span>
+                    </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        function renderSchedule() {
+            const list = document.getElementById('schedule-list');
+            list.innerHTML = schedule.map(item => `
+                <div class="timeline-item">
+                    <div class="timeline-time">${item.time}</div>
+                    <div class="timeline-desc">${item.activity}</div>
+                </div>
+            `).join('');
+        }
+
+        // --- INTERACTIONS ---
+
+        function switchTab(tabId, element) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Show selected tab
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+
+            // Update nav styling
+            document.querySelectorAll('.nav-item').forEach(nav => {
+                nav.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Filter Logic
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Update active state of buttons
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                // Render students with filter
+                renderStudents(e.target.dataset.filter);
+            });
+        });
+
+        // --- INITIALIZATION ---
+        window.onload = () => {
+            renderInventory();
+            renderStudents();
+            renderSchedule();
+        };
+
+    </script>
+</body>
+</html>
