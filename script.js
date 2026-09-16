@@ -117,7 +117,7 @@ const schedule = [
     { time: "14.30 - 15.30", activity: "Pembukaan & Shalat Ashar", note: "" },
     { time: "15.30 - 17.00", activity: "Games & Playground", note: "Wajib sepatu kets tertutup. Pantau Ghaida (2A) tidak dipaksa fisik berat. Beri jeda minum Rafasya (1B). Medis standby." },
     { time: "17.00 - 19.00", activity: "Istirahat, ISHOMA", note: "" },
-    { time: "19.00 - 20.00", activity: "BBQ", note: "Anak Asma jauh dari asap. Adnaan, Kayla, Syarafana dilarang manis berlebih. Jennaira dilarang susu sapi." },
+    { time: "19.00 - 20.00", activity: "BBQ", note: "Anak Asma jauh dari asap. Adnaan (1A), Kayla (2B), Syarafana (2B) dilarang manis berlebih. Jennaira (2A) dilarang susu sapi." },
     { time: "20.00 - 21.00", activity: "Resik diri (Oles anti nyamuk)", note: "Instruksikan oles lotion nyamuk dan kayu putih di dada." },
     { time: "21.00 - 04.00", activity: "Tidur", note: "Anak alergi dingin wajib jaket tebal & kaos kaki." },
     { time: "04.00 - 05.00", activity: "Shalat Shubuh dan Olahraga", note: "Suhu terdingin. Pantau Jahida (1A) & Xherdan (1A) rawan mimisan." },
