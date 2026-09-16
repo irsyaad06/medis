@@ -59,6 +59,14 @@
         <!-- SCHEDULE TAB -->
         <div id="tab-schedule" class="tab-content">
             <h2>Jadwal & Panduan Preventif</h2>
+            
+            <div class="filters-wrapper">
+                <div class="filters">
+                    <button class="filter-btn-schedule active" data-day="1" onclick="handleScheduleDay(1, this)">Day 1</button>
+                    <button class="filter-btn-schedule" data-day="2" onclick="handleScheduleDay(2, this)">Day 2</button>
+                </div>
+            </div>
+
             <div class="card" style="padding: 0;">
                 <div class="timeline" id="schedule-list">
                     <!-- Injected by JS -->

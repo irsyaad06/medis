@@ -113,17 +113,23 @@ const students = [
 ];
 
 const schedule = [
-    { time: "13.00 - 14.30", activity: "Registrasi & Penyerahan Bahan BBQ", note: "" },
-    { time: "14.30 - 15.30", activity: "Pembukaan & Shalat Ashar", note: "" },
-    { time: "15.30 - 17.00", activity: "Games & Playground", note: "Wajib sepatu kets tertutup. Pantau Ghaida (2A) tidak dipaksa fisik berat. Beri jeda minum Rafasya (1B). Medis standby." },
-    { time: "17.00 - 19.00", activity: "Istirahat, ISHOMA", note: "" },
-    { time: "19.00 - 20.00", activity: "BBQ", note: "Anak Asma jauh dari asap. Adnaan (1A), Kayla (2B), Syarafana (2B) dilarang manis berlebih. Jennaira (2A) dilarang susu sapi." },
-    { time: "20.00 - 21.00", activity: "Resik diri (Oles anti nyamuk)", note: "Instruksikan oles lotion nyamuk dan kayu putih di dada." },
-    { time: "21.00 - 04.00", activity: "Tidur", note: "Anak alergi dingin wajib jaket tebal & kaos kaki." },
-    { time: "04.00 - 05.00", activity: "Shalat Shubuh dan Olahraga", note: "Suhu terdingin. Pantau Jahida (1A) & Xherdan (1A) rawan mimisan." },
-    { time: "05.00 - 06.30", activity: "Resik diri, Packing & Sarapan", note: "" },
-    { time: "06.30 - 08.00", activity: "Panahan & Mini Zoo", note: "Nabila (2B) wajib masker (alergi debu hewan). Wajib cuci tangan. Area panah harus steril." },
-    { time: "08.00 - 09.00", activity: "Refleksi, Penutupan & Kepulangan", note: "" }
+    { day: 1, time: "13.00 - 14.30", activity: "Registrasi & Penyerahan Bahan BBQ", note: "" },
+    { day: 1, time: "14.00 - 14.30", activity: "Pengondisian Barang di tenda", note: "" },
+    { day: 1, time: "14.30 - 15.00", activity: "Pembukaan", note: "" },
+    { day: 1, time: "15.00 - 15.30", activity: "Shalat Ashar Berjamaah", note: "" },
+    { day: 1, time: "15.30 - 17.00", activity: "Games", note: "Wajib sepatu kets tertutup. Pantau Ghaida (2A) tidak dipaksa fisik berat. Beri jeda minum Rafasya (1B). Medis standby." },
+    { day: 1, time: "17.00 - 19.00", activity: "Istirahat, Shalat Maghrib, Makan dan Shalat Isya", note: "" },
+    { day: 1, time: "19.00 - 20.00", activity: "BBQ", note: "Anak Asma jauh dari asap. Adnaan (1A), Kayla (2B), Syarafana (2B) dilarang manis berlebih. Jennaira (2A) dilarang susu sapi." },
+    { day: 1, time: "20.00 - 21.00", activity: "Resik diri (Sikat gigi dan cuci muka)", note: "Instruksikan oles lotion nyamuk dan kayu putih di dada." },
+    { day: 1, time: "21.00 - 04.00", activity: "Tidur", note: "Anak alergi dingin wajib jaket tebal & kaos kaki." },
+    
+    { day: 2, time: "04.00 - 05.00", activity: "Shalat Shubuh dan Olahraga", note: "Suhu terdingin. Pantau Jahida (1A) & Xherdan (1A) rawan mimisan." },
+    { day: 2, time: "05.00 - 06.00", activity: "Resik diri (ganti baju camping) dan Packing", note: "" },
+    { day: 2, time: "06.00 - 06.30", activity: "Sarapan", note: "" },
+    { day: 2, time: "06.30 - 08.00", activity: "Panahan, Playground, dan mengelilingi mini zoo dan jembatan", note: "Nabila (2B) wajib masker (alergi debu hewan). Wajib cuci tangan. Area panah harus steril." },
+    { day: 2, time: "08.00 - 08.30", activity: "Refleksi Kegiatan", note: "" },
+    { day: 2, time: "08.30 - 09.00", activity: "Penutupan, Reward, dan Foto Kelompok", note: "" },
+    { day: 2, time: "09.00", activity: "Kepulangan", note: "" }
 ];
 
 const pocketBook = [
@@ -216,9 +222,11 @@ function renderStudents() {
     `).join('');
 }
 
-function renderSchedule() {
+function renderSchedule(day = 1) {
     const list = document.getElementById('schedule-list');
-    list.innerHTML = schedule.map(item => `
+    const filteredSchedule = schedule.filter(item => item.day === day);
+    
+    list.innerHTML = filteredSchedule.map(item => `
         <div class="timeline-item">
             <div class="timeline-time">${item.time}</div>
             <div style="font-weight: 600; margin-bottom: 4px;">${item.activity}</div>
@@ -257,6 +265,13 @@ function handleSearch() {
     const input = document.getElementById('search-student');
     currentSearch = input.value.toLowerCase();
     renderStudents();
+}
+
+// Schedule Day Logic
+function handleScheduleDay(day, element) {
+    document.querySelectorAll('.filter-btn-schedule').forEach(b => b.classList.remove('active'));
+    element.classList.add('active');
+    renderSchedule(day);
 }
 
 // Modal Logic
@@ -299,6 +314,6 @@ document.getElementById('medical-modal').addEventListener('click', function(e) {
 window.onload = () => {
     renderInventory();
     renderStudents();
-    renderSchedule();
+    renderSchedule(1);
     renderPocketBook();
 };

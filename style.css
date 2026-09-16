@@ -225,7 +225,7 @@ header {
     padding: 4px;
 }
 
-.filter-btn {
+.filter-btn, .filter-btn-schedule {
     background-color: var(--surface);
     border: 1px solid var(--border);
     color: var(--text-muted);
@@ -239,12 +239,12 @@ header {
     box-shadow: var(--shadow-sm);
 }
 
-.filter-btn:hover {
+.filter-btn:hover, .filter-btn-schedule:hover {
     border-color: var(--primary);
     color: var(--primary);
 }
 
-.filter-btn.active {
+.filter-btn.active, .filter-btn-schedule.active {
     background-color: var(--primary);
     color: white;
     border-color: var(--primary);
